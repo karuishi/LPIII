@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -24,6 +23,7 @@ public class ReceptorUDP {
             JOptionPane.showMessageDialog(null, new String(pkg.getData()).trim(), "Mensagem recebida", 1);
             ds.close();
         } catch (IOException ioe) {
+            System.out.println("Mensagem: " + ioe.getMessage());
         }
     }
 }
