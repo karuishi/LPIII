@@ -1,4 +1,4 @@
-package Threads;
+package Threads.Synch;
 
 public class ContadorMetodoSync {
     private int contador = 0;

@@ -1,26 +1,25 @@
-package Threads;
+package Threads.Synch;
 
-public class ContadorSemSincronizar {
+public class ContadorBlocoSync {
     private int contador = 0;
 
     public void incrementar(){
-        // 1. Ler o valor de 'contador' (ex: 10)
-        // 2. Calcular o novo valor (ex: 10 + 1 = 11)
-        // 3. Salvar o novo valor em 'contador' (ex: 11)
-        contador++;
+        // Você poderia ter outro código aqui que não precisa de lock...
+        // SOLUÇÃO: Tranca o objeto 'this' (cont) apenas durante a operação crítica.
+        synchronized (this) {
+            contador++;
+        }
     }
-
-    public static void main(String[] args) throws InterruptedException{
-        ContadorSemSincronizar cont = new ContadorSemSincronizar();
-
-        // Tarefa executada por cada thread
+    // ... e outro código aqui.
+    public static void main(String[] args) throws InterruptedException {
+        ContadorBlocoSync cont = new ContadorBlocoSync();
+        
         Runnable tarefa = () -> {
             for(int i = 0; i < 1000; i++){
                 cont.incrementar();
             }
         };
 
-        // Criar e iniciar 5 threads
         Thread t1 = new Thread(tarefa);
         Thread t2 = new Thread(tarefa);
         Thread t3 = new Thread(tarefa);
@@ -33,13 +32,13 @@ public class ContadorSemSincronizar {
         t4.start();
         t5.start();
 
-        // Esperar todas as threads terminarem
         t1.join();
         t2.join();
         t3.join();
         t4.join();
         t5.join();
-
-        System.out.println("Resultado final (sem sincronizar): " + cont.contador);
+            
+        // O resultado aqui também será sempre 5000.
+        System.out.println("Resultado final (Bloco Sync): " + cont.contador);
     }
 }

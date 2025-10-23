@@ -1,4 +1,4 @@
-package Threads;
+package Exercicios;
 import java.io.*;
 import java.net.*;
 import java.util.concurrent.atomic.AtomicBoolean;
