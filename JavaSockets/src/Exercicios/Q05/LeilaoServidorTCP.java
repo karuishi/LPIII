@@ -59,6 +59,11 @@ public class LeilaoServidorTCP {
                 servidorTCP.addClient(out); // Adiciona cliente na lista, assim que é conectado
                 String linhaCliente;
                 while((linhaCliente = in.readLine()) != null){ // Captura a entrada do teclado do cliente
+                    if("exit".equalsIgnoreCase(linhaCliente.trim())){
+                    out.println("Você saiu do chat. Até logo!");
+                    break;
+                    }
+                    
                     try {
                         double lance = Double.parseDouble(linhaCliente);
                         broadcastNewBid(lance);
@@ -79,7 +84,6 @@ public class LeilaoServidorTCP {
                 }
             }
         }
-        
     }
     
     // Adiciona um novo cliente à lista (thread-safe)
