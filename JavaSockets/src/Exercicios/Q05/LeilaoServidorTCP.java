@@ -63,7 +63,7 @@ public class LeilaoServidorTCP {
                     out.println("Você saiu do chat. Até logo!");
                     break;
                     }
-                    
+
                     try {
                         double lance = Double.parseDouble(linhaCliente);
                         broadcastNewBid(lance);
@@ -99,11 +99,13 @@ public class LeilaoServidorTCP {
     // Atualiza o lance máximo e notifica todos os clientes
     private void broadcastNewBid(double novoLance){
         synchronized(bidLock){
-            if(novoLance > lanceMaxAtual) lanceMaxAtual = novoLance;
-        }
-
-        for(PrintWriter pw : clientWriters){
-            pw.println("Novo lance: " + novoLance);
+            if(novoLance > lanceMaxAtual){ 
+                lanceMaxAtual = novoLance;
+                
+                for(PrintWriter pw : clientWriters){
+                    pw.println("Novo lance: " + novoLance);
+                }
+            }
         }
     }
 }
