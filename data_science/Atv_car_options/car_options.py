@@ -70,12 +70,24 @@ print("\n Estatísticas descritivas do preço total ")
 print(df['total_price'].describe())
 
 print("\n Preço médio total por marca ")
-media_por_marca = df.groupby('brand_name')['total_price'].mean().sort_values(ascending=False)
-print(media_por_marca)
+# media_por_marca = df.groupby('brand_name')['total_price'].mean().sort_values(ascending=False)
+# print(media_por_marca)
+media_por_marca = df.groupby('brand_name')['total_price'].agg(
+    media='mean', 
+    desvio_padrao='std', 
+    qtd_carros='count'
+    ).sort_values('media', ascending=False)
+print(media_por_marca.fillna('-'))
 
 print("\n Preço médio das opções por cor ")
-media_por_cor = df.groupby('color')['option_set_price'].mean().sort_values(ascending=False)
-print(media_por_cor)
+# media_por_cor = df.groupby('color')['option_set_price'].mean().sort_values(ascending=False)
+# print(media_por_cor)
+media_por_cor = df.groupby('color')['option_set_price'].agg(
+    media='mean', 
+    desvio_padrao='std', 
+    qtd_carros='count'
+    ).sort_values('media', ascending=False)
+print(media_por_cor.fillna('-'))
 
 print("\n Correlação entre preço base do modelo e preço das opções ")
 correlacao = df[['model_base_price', 'option_set_price', 'total_price']].corr()
@@ -84,7 +96,12 @@ print(correlacao)
 sns.set_style("whitegrid")
 # 1) Preço total médio por marca
 plt.figure(figsize=(9, 5))
-media_por_marca.plot(kind='bar', color='steelblue')
+plt.bar(media_por_marca.index,
+    media_por_marca['media'],
+    yerr=media_por_marca['desvio_padrao'],
+    capsize=5,
+    color='steelblue',
+    )
 plt.title('Preço Total Médio por Marca')
 plt.ylabel('Preço Total Médio (USD)')
 plt.xlabel('Marca')

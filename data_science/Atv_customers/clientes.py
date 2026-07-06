@@ -78,15 +78,27 @@ print("\n Estatísticas descritivas do preço pago ")
 print(df['purchase_price'].describe())
 
 print("\n Renda média e preço médio pago, por gênero ")
-por_genero = df.groupby('gender')[['household_income', 'purchase_price']].mean()
+# por_genero = df.groupby('gender')[['household_income', 'purchase_price']].mean()
+# print(por_genero)
+por_genero = df.groupby('gender').agg(
+    renda_media=('household_income', 'mean'),
+    renda_desvio_padrao=('household_income', 'std'),
+    preco_medio=('purchase_price', 'mean'),
+    preco_desvio_padrao=('purchase_price', 'std'),
+    qtd_clientes=('purchase_price', 'count'),
+)
 print(por_genero)
 
 print("\n Idade média dos clientes no momento da compra ")
-print(df['idade_na_compra'].mean())
+print(f"Média: {df['idade_na_compra'].mean():.1f} anos")
+print(f"Desvio padrão: {df['idade_na_compra'].std():.1f} anos")
 
 print("\n Preço médio pago por concessionária ")
-por_dealer = df.groupby('dealer_name')['purchase_price'].mean().sort_values(ascending=False)
-print(por_dealer)
+stats_dealer = df.groupby('dealer_name')['purchase_price'].agg(
+    media='mean', desvio_padrao='std', qtd_compras='count'
+).sort_values('media', ascending=False)
+print(stats_dealer.fillna('-'))
+por_dealer = stats_dealer['media']
 
 print("\n Correlação entre renda familiar e preço pago pelo carro ")
 correlacao = df[['household_income', 'purchase_price', 'idade_na_compra']].corr()
@@ -110,7 +122,13 @@ plt.close()
 
 # 2) Preço médio pago por concessionária
 plt.figure(figsize=(8, 5))
-por_dealer.plot(kind='bar', color='mediumseagreen')
+plt.bar(
+    stats_dealer.index,
+    stats_dealer['media'],
+    yerr=stats_dealer['desvio_padrao'],
+    capsize=5,
+    color='mediumseagreen',
+)
 plt.title('Preço Médio Pago por Concessionária')
 plt.xlabel('Concessionária')
 plt.ylabel('Preço Médio (USD)')
