@@ -1,0 +1,27 @@
+option_set_id,brand_name,model_name,model_base_price,color,option_set_price,total_price
+1,Supreme,Hat,22000,Blue,2000,24000
+2,Supreme,Sweater,25000,Yellow,1200,26200
+3,Supreme,T-Shirt,27000,Green,1100,28100
+4,Boujiee,Too Much,35000,Red,4000,39000
+5,Boujiee,Extra,30000,Sky,3000,33000
+6,Freshest,Beats,24000,Birthday Cake,2500,26500
+7,Freshest,Bars,35000,Cyan,7000,42000
+8,Ferrari,LaFerrari,125000,Purple,2500,127500
+9,Ferrari,450,75000,Red,10000,85000
+10,Ferrari,F12 Berlinetta,110000,Blue,11300,121300
+11,Ferrari,F40,100000,Green,23000,123000
+12,Cover Squirrel,The Blonde,23000,Black,1100,24100
+13,Cover Squirrel,The Brunette,25000,Blue,2000,27000
+14,Cover Squirrel,The Red Head,29000,Red,1500,30500
+15,Supreme,Hat,22000,Yellow,4000,26000
+16,Supreme,Sweater,25000,Black,3600,28600
+17,Yellow,Orange,15000,White,2300,17300
+18,Yellow,Blue,12000,Pretty,2200,14200
+19,Yellow,Green,17000,Glitter BomB,2900,19900
+20,Boujiee,Extra,30000,Nyan,7999,37999
+21,Ferrari,F12 Berlinetta,110000,Ultraviolet,25000,135000
+22,Ferrari,450,75000,Transparent,40000,115000
+23,Supreme,T-Shirt,27000,Green,1200,28200
+24,Cover Squirrel,The Brunette,25000,Purple,3900,28900
+25,Cover Squirrel,The Blonde,23000,Red,900,23900
+26,Ferrari,450,75000,Magenta,200,75200
